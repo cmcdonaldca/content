@@ -1,4 +1,3 @@
-content
+Colin McDonald's Content
 =======
-
-Content that I want published on the internet
+http://content.colinmcdonald.ca
