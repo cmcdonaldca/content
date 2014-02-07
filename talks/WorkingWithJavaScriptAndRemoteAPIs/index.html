@@ -4,130 +4,23 @@ title:  "Working With JavaScript and Remote APIs"
 description:   "A talk detailing some challenges in working with JavaScript and Remote APIs"
 author: "Colin McDonald <cmcdonaldca@gmail.com>"
 ---
-                <section data-background="kids.jpg">
-                    <h2 style="color:white;">Working With</h2>
-                    <h3 style="color:white;">JavaScript and Remote APIS</h3>
-                    <p>
-                    <small>
-                      <a style="color:white;" href="http://colinmcdonald.ca">
-                        Colin McDonald
-                      </a>
-                      / 
-                      <a style="color:white;" href="http://twitter.com/ColinMcDonald">
-                        @ColinMcDonald
-                      </a>
-                    </small>
-                    </p>
-                </section>
+<section data-background="kids.jpg">
+  <h2 style="color:white;">Working With</h2>
+  <h3 style="color:white;">JavaScript and Remote APIS</h3>
+  <p><small><a style="color:white;" href="http://colinmcdonald.ca">Colin McDonald</a>
+  / 
+  <a style="color:white;" href="http://twitter.com/ColinMcDonald">@ColinMcDonald</a>
+  </small>
+  </p>
+</section>
 
-		<section data-background="feynman.jpg">
-                  <blockquote style="color: white;">
-		  "If you can't explain it to a six year old, you don't really understand it." - Richard Feynman
-                  </blockquote>
-                  <br/><br/><br/><br/>
-                  <br/><br/><br/><br/>
-		</section>
 
-                <section>
-                        <h2>What's a closure?</h2>
-                        <blockqoute cite="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures">
-                        "Closures are functions that refer to independent
-                        (free) variables." [MDN]
-                        </blockquote>
-                 </section>
 
-                 <section>
-                       <h3>Why Closures?</h3>
-                       <ul>
-                         <li>Common in JavaScript.</li>
-                         <li>Node.JS callbacks.</li>
-                         <li>Some practical uses.</li>
-                         <li>Some unexpected problems.</li>
-                       </ul>
-                 </section>
-
-                <section>
-                    <h2>The Simplest Closure</h2>
-                    <pre><code data-trim contenteditable>
-&nbsp;
-    var x = 1;
-    function foo() {
-      return x;
-    }
-&nbsp;
-                    </code></pre>
-                </section>
-
-        <section data-background="backpacker.jpg">
-		<h3 style="color:white;">The Traveller</h3>
-                <blockquote style="color: white; background: rgba(0,0,0,0.4);">
-		<p>
-		A man goes on a long trip. Before leaving, he takes a snapshot
-                of his house. 
-                <p>
-                While he's away, the house is replaced with a 
-                condo. The man is unaware and continues to show the photo and 
-                describe his house to the people he meets.
-		</blockquote>
-        </section>
-
-                <section>
-                    <h3>The Traveller code example</h3>
-                    <pre><code data-trim contenteditable>
-&nbsp;
-    var color = 'white';
-
-    function leaveHome () {
-       // a variable in leaveHome's scope
-       var description = "My house is " + color;
-       // returns another function, creating a closure over description
-       return function() {
-          console.log(description);
-       }
-    }
-
-    var travellingMan = leaveHome();
-    travellingMan(); // "My house is white"
-    color = 'red';   // They painted the house
-    travellingMan(); // "My house is white"
-&nbsp;
-                    </code></pre>
-                </section>
-
-                <section>
-                    <h3>Things to Notice</h3>
-                    <ol>
-		      <li>In Javascript, functions are objects, too.</li>
-                      <li>Functions can create and return other functions.</li>
-                      <li>Functions can be anonymous.</li>
-		      <li>The returned function "closes over" the variables in
-                          the scope where it was created, forming a closure.</li>
-                    </ol>
-                </section>
-                <section>
-                   <h3>More examples</h3>
-                    <ul>
-                      <li>An "inner function" is a closure.</li>
-                      <li>Functions that get returned are closures.</li>
-                      <li>Functions that get passed (ie. callbacks) are closures.</li>
-                      <li>Any function that accesses variables outside it's immediate lexical scope is a closure.</li>
-                    </ul>
-               </section>
-
-                <section>
-                    <h3>Related Methods</h3>
-                     <ul>
-                     <li>Function.call</li>
-                     <li>Function.apply</li>
-                     <li>Function.bind</li>
-                     <ul>
-                </section>
-
-                <section>
-                <h3></h3>
-                <p>This talk can be found on my website: 
-                <a href="http://content.colinmcdonald.ca/talks/WorkingWithJavaScriptAndRemoteAPIs">
-                http://content.colinmcdonald.ca/talks/WorkingWithJavaScriptAndRemoteAPIs
-                </a>
-                </p>
-                </section>
+<section>
+  <h3></h3>
+  <p>This talk can be found on my website: 
+  <a href="http://content.colinmcdonald.ca/talks/WorkingWithJavaScriptAndRemoteAPIs">
+  http://content.colinmcdonald.ca/talks/WorkingWithJavaScriptAndRemoteAPIs
+  </a>
+  </p>
+</section>
