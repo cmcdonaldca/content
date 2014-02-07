@@ -1,12 +1,19 @@
 ---
 layout: default
-title: Random and Infrequent Writings
 ---
 
 <div id="home">
+<h2>Posts</h2>
   <ul class="posts">
     {% for post in site.posts %}
       <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
     {% endfor %}
+  </ul>
+</div>
+
+<div>
+	<h2>Talks</h2>
+  <ul class="posts">
+        <li><span>13 Feb 2014 - Ottawa JS</span> &raquo; <a href="talks/WorkingWithJavaScriptAndRemoteAPIs/#/">Working With JavaScript and Remote APIs</a></li>
   </ul>
 </div>
