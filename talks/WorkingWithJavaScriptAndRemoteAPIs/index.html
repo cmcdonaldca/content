@@ -1,26 +1,312 @@
 ---
 layout: talk
-title:  "Working With JavaScript and Remote APIs"
-description:   "A talk detailing some challenges in working with JavaScript and Remote APIs"
+title:  "Developing Apps With JavaScript and Remote APIs"
+description:   "A talk detailing some challenges in developing with JavaScript and Remote APIs"
 author: "Colin McDonald <cmcdonaldca@gmail.com>"
 ---
-<section data-background="kids.jpg">
-  <h2 style="color:white;">Working With</h2>
+<section>
+  <h2 style="color:white;">Developing Apps</h2>
+  <p style="color:white;">with</p>
   <h3 style="color:white;">JavaScript and Remote APIS</h3>
-  <p><small><a style="color:white;" href="http://colinmcdonald.ca">Colin McDonald</a>
-  / 
+  <p><small>
+  <a style="color:white;" href="http://twitter.com/ColinMcDonald">@ColinMcDonald</a>
+  </small>
+  </p>
+</section>
+
+<section>
+  <h2 style="color:white;">Developing Apps</h2>
+  <p style="color:white;">with</p>
+  <h3 style="color:white;">JavaScript and <del>Remote APIS</del></h3>
+  <p><small>
   <a style="color:white;" href="http://twitter.com/ColinMcDonald">@ColinMcDonald</a>
   </small>
   </p>
 </section>
 
 
+<section>
+  <h2 style="color:white;">Developing Apps</h2>
+  <p style="color:white;">with</p>
+  <h3 style="color:white;">JavaScript and Shopify</h3>
+  <p><small>
+  <a style="color:white;" href="http://twitter.com/ColinMcDonald">@ColinMcDonald</a>
+  </small>
+  </p>
+</section>
+
+<section>
+  <h3>Colin McDonald</h3>
+  <p>Seasoned start-up software developer.</p>
+  <p>Co-founder &amp; Lead (read: only) developer @ <a href="http://foko.co">FoKo</a>.</p>
+</section>
+
+<section>
+  <h3>Shopify Apps</h3>
+  <p>Traditionally are web apps.</p>
+</section>
+
+<section>
+  <p>Offline/Service worker with node.js</p>
+</section>
+
+<section>
+  <h3>Shopify API - REST</h3>
+  <p>Registered shopify app makes HTTP requests.</p>
+</section>
+
+<section>
+  <h3>Find success in the details.</h3>
+  <p><img src="success.jpg" /></p>
+</section>
+
+<section>
+  <p>Read the documentation.</p>
+</section>
+
+<section>
+  <p>Read it again.</p>
+</section>
+
+<section>
+  <p>And read it again.</p>
+</section>
+
+<section>
+  <h3>Authentication</h3>
+  <p><img src="security.jpg" /></p>
+</section>
+
+<section>
+  <p>Are you the App you say you are?</p>
+</section>
+
+<section>
+  <p>Each Shopify customer must give you permission.</p>
+</section>
+
+<section>
+  <p>Shopify Apps use OAuth 2.0.</p>
+</section>
+
+<section>
+  <p>You get a token. Keep that token.</p>
+</section>
+
+<section>
+  <h3>Simplify your life</h3>
+  <p>DRY approach - to an extent.</p>
+</section>
+
+<section>
+  <h3>Example</h3>
+  <p>Get shop info.</p>
+</section>
+
+<section>
+  <h3>HTTP Request with node.js</h3>
+<pre><code data-trim contenteditable>
+&nbsp;
+var requestData = {
+  hostname: shopDomain,
+  path: '/admin/shop.json',
+  method: 'GET',
+  headers: {
+    'X-Shopify-Access-Token': token,
+    'Expect:': ''
+  }
+};
+&nbsp;
+</code></pre>
+</section>
+
+<section>
+<pre><code data-trim contenteditable>
+&nbsp;
+var https = require('https');
+var req = https.request(requestData, function(res) {
+  res.on('data', function(){ 
+    // collect data
+  });
+  res.on('end', function(){
+    // check for http statusCodes, etc
+  });
+});
+req.on('error', function(e) { 
+  // handle error in making request
+});
+req.end();
+&nbsp;
+</code></pre>
+</section>
+
+<section>
+<pre><code data-trim contenteditable>
+&nbsp;
+var ShopifyAPI = require('shopify-node-promise');
+var api = new ShopifyAPI(shopDomain, token);
+api.get("/admin/shop.json").then(function(result){
+  console.log(result);
+});
+&nbsp;
+</code></pre>
+</section>
+
+
+<section>
+  <p>Purists may not like the URL Path being repeated.</p>
+</section>
+
+<section>
+  <p>All comes back to following the API docs.</p>
+</section>
+
+<section>
+  <h3>Sequential API Calls</h3>
+  <p>I use promises</p>
+</section>
+
+<section>
+  <h3>Promises</h3>
+  <pre><code data-trim contenteditable>
+&nbsp;
+api.get("/admin/shop.json").then(function(result){
+  console.log(result);
+}, function(e){
+  console.error(e);
+});
+&nbsp;
+</code></pre>
+</section>
+
+<section>
+<pre><code data-trim contenteditable>
+&nbsp;
+api.get("/admin/shop.json").then(function(result){
+  shop = result;
+  return api.get("/admin/customers.json");
+}).then(function(result){
+  customers = result;
+  // save to local datastore
+  return data.save(shop, customers);
+}).then(function(saveResults){
+  console.log('All Passed!');
+}, function(e){
+  console.error(e);
+};
+&nbsp;
+</code></pre>
+</section>
+
+<section>
+<pre><code data-trim contenteditable>
+&nbsp;
+api.get("/admin/shop.json").then(function(result){
+  shop = result;
+  return api.get("/admin/customers.json");
+}).then(function(result){
+  customers = result;
+  // save to local datastore
+  return data.save(shop, customers);
+}).then(function(saveResults){
+  console.log('All Passed!');
+}, function(e){
+  console.error(e);
+};
+&nbsp;
+</code></pre>
+</section>
+
+<section>
+  <p><img src="testing.png" /></p>
+</section>
+
+<section>
+  <p>mocha</p>
+  <p>&amp;</p>
+  <p>require("chai")</p>
+</section>
+
+
+
+<section>
+<pre><code data-trim contenteditable>
+&nbsp;
+&nbsp;
+</code></pre>
+</section>
 
 <section>
   <h3></h3>
-  <p>This talk can be found on my website: 
-  <a href="http://content.colinmcdonald.ca/talks/WorkingWithJavaScriptAndRemoteAPIs">
-  http://content.colinmcdonald.ca/talks/WorkingWithJavaScriptAndRemoteAPIs
-  </a>
-  </p>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+<section>
+  <h3></h3>
+  <p></p>
+</section>
+
+
+
+<section>
+  <h3>Thanks for participating!</h3>
+  <ul>
+    <li><a href="http://content.colinmcdonald.ca/">This Slide</a></li>
+    <li><a href="http://docs.shopify.com/api">Shopify API</a></li>
+    <li><a href="http://www.promisejs.org/">Intro to Promises</a></li>
+    <li><a href="http://visionmedia.github.io/mocha/">Mocha</a></li>
+    <li><a href="http://chaijs.com/">Chai</a></li>
+    <li><a href="https://github.com/cmcdonaldca/shopify-node-promise">Shopify Node Promise</a></li>
+  </ul>
+
 </section>
