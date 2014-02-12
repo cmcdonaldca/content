@@ -199,26 +199,41 @@ api.get("/admin/shop.json").then(function(result){
 </section>
 
 <section>
-<pre><code data-trim contenteditable>
-&nbsp;
-api.get("/admin/shop.json").then(function(result){
-  shop = result;
-  return api.get("/admin/customers.json");
-}).then(function(result){
-  customers = result;
-  // save to local datastore
-  return data.save(shop, customers);
-}).then(function(saveResults){
-  console.log('All Passed!');
-}, function(e){
-  console.error(e);
-};
-&nbsp;
-</code></pre>
+  <h3>API Calls will fail</h3>
+  <p>Group a set of API calls together.</p>
 </section>
 
 <section>
+  <h3>API Calls will fail</h3>
+  <p>Retry on certain errors.</p>
+</section>
+
+<section>
+  <h3>API Calls will fail</h3>
+  <p>Only continue when they pass.</p>
+</section>
+
+<section>
+  <h3>Transaction Script</h3>
+  <p>Organizes business logic by procedures where each procedure handles a single request...</p>
+</section>
+
+
+<section>
   <p><img src="testing.png" /></p>
+</section>
+
+<section>
+  <p>Finding the right balance of code-coverage.</p>
+</section>
+
+<section>
+  <h3>Integration vs Unit Tests</h3>
+  <p>Integration is high-level, unit is low-level.</p>
+</section>
+
+<section>
+  <p>Integration do not use mock objects.</p>
 </section>
 
 <section>
@@ -227,76 +242,23 @@ api.get("/admin/shop.json").then(function(result){
   <p>require("chai")</p>
 </section>
 
-
-
 <section>
 <pre><code data-trim contenteditable>
 &nbsp;
+  describe('ShopifyAPI.get', function() {
+
+    it('should return shop object', function(done) {
+
+      shopifyAPI.get("/admin/shop.json").then(function(result) {
+
+        assert.equal(result.data.shop.name, config.shopName);
+        done();
+
+      }, function(error) { done(error);  });
+    });
 &nbsp;
 </code></pre>
 </section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-<section>
-  <h3></h3>
-  <p></p>
-</section>
-
-
 
 <section>
   <h3>Thanks for participating!</h3>
@@ -304,6 +266,7 @@ api.get("/admin/shop.json").then(function(result){
     <li><a href="http://content.colinmcdonald.ca/">This Slide</a></li>
     <li><a href="http://docs.shopify.com/api">Shopify API</a></li>
     <li><a href="http://www.promisejs.org/">Intro to Promises</a></li>
+    <li><a href="http://martinfowler.com/eaaCatalog/transactionScript.html">Transaction Script Pattern</a></li>
     <li><a href="http://visionmedia.github.io/mocha/">Mocha</a></li>
     <li><a href="http://chaijs.com/">Chai</a></li>
     <li><a href="https://github.com/cmcdonaldca/shopify-node-promise">Shopify Node Promise</a></li>
